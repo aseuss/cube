@@ -1,0 +1,37 @@
+//
+// src/cube_config.h
+//
+// Copyright 2017 Andreas Seuss
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef CUBE_CUBE_CONFIG_H
+#define CUBE_CUBE_CONFIG_H
+namespace c3 {
+
+// TODO: turn into c++ constants?
+#define CUBE_VERSION_MAJOR @cube_VERSION_MAJOR@
+#define CUBE_VERSION_MINOR @cube_VERSION_MINOR@
+#define CUBE_VERSION_PATCH @cube_VERSION_PATCH@
+
+// The major version number is a 10-bit integer packed into bits 31-22.
+// The minor version number is a 10-bit integer packed into bits 21-12.
+// The patch version number is a 12-bit integer packed into bits 11-0.
+#define CUBE_ENGINE_VERSION \
+    (((@cube_VERSION_MAJOR@) << 22) | ((@cube_VERSION_MINOR@) << 12) | (@cube_VERSION_PATCH@))
+#define CUBE_ENGINE_NAME "@cube_ENGINE_NAME@"
+
+} // end of namespace c3
+
+#endif // CUBE_CUBE_CONFIG_H
+
