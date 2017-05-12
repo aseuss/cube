@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# exclude build directory
+build/
+
+# exclude temporary files
+*.swp
+~*
