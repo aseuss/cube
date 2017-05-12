@@ -1,0 +1,24 @@
+sudo: required
+language: cpp
+compiler:
+  - clang
+  - gcc
+os: linux
+dist: trusty
+before_script:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libassimp-dev
+  - pwd
+  - wget https://vulkan.lunarg.com/sdk/download/1.0.46.0/linux/vulkansdk-linux-x86_64-1.0.46.0.run
+  - chmod +x vulkansdk-linux-x86_64-1.0.46.0.run
+  - ./vulkansdk-linux-x86_64-1.0.46.0.run
+  - VULKAN_SDK_PATH=$(pwd)/VulkanSDK/1.0.46.0
+  - echo $VULKAN_SDK_PATH
+  - export VULKAN_SDK=$VULKAN_SDK_PATH/x86_64
+  - export PATH=$VULKAN_SDK/bin:$PATH
+  - export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
+script:
+  - mkdir build
+  - cd build
+  - cmake ../
+  - make
