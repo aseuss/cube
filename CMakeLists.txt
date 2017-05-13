@@ -1,4 +1,7 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.2)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/external/cmake")
+
+message(STATUS "cmake module path: " ${CMAKE_MODULE_PATH})
 
 set(NAME cube)
 
@@ -22,24 +25,15 @@ include_directories(external/glm)
 #include_directories(external/assimp)
 #add_subdirectory(samples)
 
-# use FindVulkan module if available
-if(NOT CMAKE_VERSION VERSION_LESS 3.7.0)
-    message(STATUS "using module to find Vulkan")
-    find_package(Vulkan REQUIRED)
-else(NOT CMAKE_VERSION VERSION_LESS 3.7.0)
-    message(STATUS "using own module to find Vulkan")
-    include(${CMAKE_CURRENT_SOURCE_DIR}/external/cmake/FindVulkan.cmake)
-    #find_package(Vulkan REQUIRED)
-endif(NOT CMAKE_VERSION VERSION_LESS 3.7.0)
-
-#if(NOT Vulkan_FOUND)
-#    find_library(Vulkan_LIBRARY NAMES vulkan HINTS "$ENV{VULKAN_SDK}/lib" REQUIRED)
-#    if (Vulkan_LIBRARY)
-#        set(Vulkan_FOUND ON)
-#    endif (Vulkan_LIBRARY)
-#endif(NOT Vulkan_FOUND)
 
 find_package(ASSIMP REQUIRED)
+find_package(Vulkan REQUIRED)
+
+# somehow there are cases where vulkan is found but Vulkan_FOUND is not
+# set approprately hence this 'work around'
+if(Vulkan_LIBRARY)
+    set(Vulkan_FOUND ON)
+endif()
 
 if(NOT Vulkan_FOUND)
     message(FATAL_ERROR "could not find vulkan library")
