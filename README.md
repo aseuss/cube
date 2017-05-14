@@ -26,4 +26,5 @@ and [Assimp](https://github.com/assimp/assimp).
  * [Vulkan](https://www.khronos.org/vulkan/)([API spec](https://www.khronos.org/registry/vulkan/specs/1.0/apispec.html), [Quick Reference Card](https://www.khronos.org/registry/vulkan/specs/1.0/refguide/Vulkan-1.0-web.pdf)) The official Vulkan resources
  * [LunarG SDK](https://www.lunarg.com/vulkan-sdk/) The Vulkan SDK by LunarG
  * [Assimp](https://github.com/assimp/assimp) The Open Asset Import Library
+ * [Googletest](https://github.com/google/googletest) Google's C++ test framework
  * [Sascha Willems Vulkan](https://github.com/SaschaWillems/Vulkan) a great resource on Vulkan programming

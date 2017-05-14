@@ -53,6 +53,9 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 
 include_directories(${Vulkan_INCLUDE_DIR})
 
+add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(samples)
 
+enable_testing()
+add_subdirectory(tests)
