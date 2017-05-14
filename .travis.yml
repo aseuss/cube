@@ -5,6 +5,23 @@ compiler:
   - gcc
 os: linux
 dist: trusty
+env:
+  global:
+    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+    # via the "travis encrypt" command using the project repo's public key
+    - secure: "lBFHyGUkHV0g5DexLRa5mcU3JatdHKgtp7riiv7a6J3oCEmso63B4U9BnA9RM4Zn64leoXqNci4N+TFGIlm1SgGtAO6OVmG9hRAnvPdS8A0eGQ9Gac/E4hRPSxONRbvaNzR7+Y5EAinVwqe8Kd1TPJ3BOWNbhOIjeE69f7uIhHMTnSwFxXJdivEC0mNAmsdqdRzlS42O+BzvTo3PSGFBzL/h3UWVLZvz4eFXLJ3wLTFUiTld079NtqGg8Gd8cKuaodKap+z3+beGPEUaKF9aAlGi3RH6/r8AhkOo+fpKHTQFa+eTS05duZ+NX7Q803BIIAExMw8/cb9vmR8dvf/ZVPbyN2Gh3X3c4n8QXyGedT1VzzL2KgZApuJS7W/EIhqXXimPYNjzbP/F7kd9hFvgl4KhRNYMN4NTtlHwwGneD03vF4PfGI9uKMCw2jvIuEtfUXEOq6a7eGLRbax6EsTP9ICfUlaB4fJKrdH4pxIV1RLSDMoVkXFzOjQCWbFCOvqCpxVcSa+daXZa5ktmSLNVn9IF6RB75XmODp+q+oA/lYwEzR19K5Jj/zvNrIqBzmnmnhOA+4O9611l3ThIRONc8+3H/aKI+gjho1PoIPvNddYq6uEa6+6s/19XbNKsQFdogEE7OL0lvBXouZKLj5tQboHVKhs9OmvEZL2RByArEHc="
+
+before_install:
+  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+addons:
+  coverity_scan:
+    project:
+      name: "aseuss/cube"
+      description: "Build submitted via Travis CI"
+    notification_email: aseuss@seussnet.de
+    build_command_prepend: "mkdir build && cd build && cmake .."
+    build_command:   "make -j 4"
+    branch_pattern: coverity_scan
 before_script:
   - sudo apt-get -qq update
   - sudo apt-get install -y libassimp-dev
@@ -18,7 +35,9 @@ before_script:
   - export PATH=$VULKAN_SDK/bin:$PATH
   - export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
 script:
-  - mkdir build
-  - cd build
-  - cmake ../
-  - make
+  - source .travis.sh
+    #  - rm -rf build
+    #  - mkdir build
+    #  - cd build
+    #  - cmake ../
+    #  - make
