@@ -35,3 +35,5 @@ before_script:
   - export PATH=$VULKAN_SDK/bin:$PATH
   - export LD_LIBRARY_PATH=$VULKAN_SDK/lib:$LD_LIBRARY_PATH
 script: ./.travis.sh
+notifications:
+  email: false
