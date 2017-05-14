@@ -33,4 +33,5 @@ build/
 
 # exclude temporary files
 *.swp
+*.swo
 ~*
